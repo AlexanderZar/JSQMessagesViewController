@@ -74,6 +74,19 @@
 - (BOOL)isMediaMessage;
 
 /**
+ *  This method is used to determine if the message data is system message.
+ *  If this method returns `YES`, an instance of `JSQMessagesViewController` will display
+ *  this message as system using `JSQMessagesCollectionViewCellSystem`. Only 'text' method
+ *  of this protocol is supported.
+ *
+ *
+ *  @return A boolean value specifying whether or not this is a system message or user message.
+ *  Return `YES` if this item is a system message, and `NO` if it is a user message.
+ */
+
+- (BOOL)isSystemMessage;
+
+/**
  *  @return An integer that can be used as a table address in a hash table structure.
  *
  *  @discussion This value must be unique for each message with distinct contents. 

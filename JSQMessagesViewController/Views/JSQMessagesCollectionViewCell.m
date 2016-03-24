@@ -20,6 +20,7 @@
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
+#import "JSQMessagesCollectionViewCellSystem.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
@@ -186,8 +187,10 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     if (!UIEdgeInsetsEqualToEdgeInsets(self.textView.textContainerInset, customAttributes.textViewTextContainerInsets)) {
         self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
     }
-
-    self.textViewFrameInsets = customAttributes.textViewFrameInsets;
+    
+    self.textViewFrameInsets = ([self isKindOfClass:[JSQMessagesCollectionViewCellSystem class]])
+    ? UIEdgeInsetsZero
+    : customAttributes.textViewFrameInsets;
 
     [self jsq_updateConstraint:self.messageBubbleContainerWidthConstraint
                   withConstant:customAttributes.messageBubbleContainerViewWidth];

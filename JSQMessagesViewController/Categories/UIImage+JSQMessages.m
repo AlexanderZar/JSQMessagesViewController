@@ -85,6 +85,11 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_min_tailless"];
 }
 
++ (UIImage *)jsq_bubbleSystemImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"bubble_system"];
+}
+
 + (UIImage *)jsq_defaultAccessoryImage
 {
     return [UIImage jsq_bubbleImageFromBundleWithName:@"clip"];

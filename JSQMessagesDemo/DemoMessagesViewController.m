@@ -314,7 +314,8 @@
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
                                              senderDisplayName:senderDisplayName
                                                           date:date
-                                                          text:text];
+                                                          text:text
+                                               isSystemMessage:NO];
     
     [self.demoData.messages addObject:message];
     
@@ -391,6 +392,10 @@
     
     JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
     
+    if (message.isSystemMessage) {
+        return self.demoData.systemBubbleImageData;
+    }
+    
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.demoData.outgoingBubbleImageData;
     }
@@ -420,7 +425,11 @@
      *
      *  Override the defaults in `viewDidLoad`
      */
+    
     JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
+    
+    if (message.isSystemMessage)
+        return nil;
     
     if ([message.senderId isEqualToString:self.senderId]) {
         if (![NSUserDefaults outgoingAvatarSetting]) {
@@ -514,7 +523,10 @@
     
     if (!msg.isMediaMessage) {
         
-        if ([msg.senderId isEqualToString:self.senderId]) {
+        if (msg.isSystemMessage) {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        else if ([msg.senderId isEqualToString:self.senderId]) {
             cell.textView.textColor = [UIColor blackColor];
         }
         else {

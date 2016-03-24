@@ -52,6 +52,12 @@
 @property (assign, nonatomic, readonly) BOOL isMediaMessage;
 
 /**
+ *  Returns a boolean value specifying if the message is system one.
+ *  The value of this property depends on how the object was initialized.
+ */
+@property (assign, nonatomic, readonly) BOOL isSystemMessage;
+
+/**
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
@@ -70,9 +76,27 @@
  *  Initializes and returns a message object having the given senderId, displayName, text,
  *  and current system date.
  *
- *  @param senderId    The unique identifier for the user who sent the message. This value must not be `nil`.
- *  @param displayName The display name for the user who sent the message. This value must not be `nil`.
- *  @param text        The body text of the message. This value must not be `nil`.
+ *  @param senderId         The unique identifier for the user who sent the message. This value must not be `nil`.
+ *  @param displayName      The display name for the user who sent the message. This value must not be `nil`.
+ *  @param text             The body text of the message. This value must not be `nil`.
+ *
+ *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO` and `isSystemMessage` to `NO`.
+ *
+ *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ */
++ (instancetype)messageWithSenderId:(NSString *)senderId
+                        displayName:(NSString *)displayName
+                               text:(NSString *)text;
+
+
+/**
+ *  Initializes and returns a message object having the given senderId, displayName, text,
+ *  and current system date.
+ *
+ *  @param senderId         The unique identifier for the user who sent the message. This value must not be `nil`.
+ *  @param displayName      The display name for the user who sent the message. This value must not be `nil`.
+ *  @param text             The body text of the message. This value must not be `nil`.
+ *  @param isSystemMessage  The value of isSystemMessage property.
  *
  *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
  *
@@ -80,7 +104,8 @@
  */
 + (instancetype)messageWithSenderId:(NSString *)senderId
                         displayName:(NSString *)displayName
-                               text:(NSString *)text;
+                               text:(NSString *)text
+                    isSystemMessage:(BOOL)isSystemMessage;
 
 /**
  *  Initializes and returns a message object having the given senderId, senderDisplayName, date, and text.
@@ -90,7 +115,7 @@
  *  @param date              The date that the message was sent. This value must not be `nil`.
  *  @param text              The body text of the message. This value must not be `nil`.
  *
- *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
+ *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO` and `isSystemMessage` to `NO`.
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
@@ -98,6 +123,25 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                             text:(NSString *)text;
+
+/**
+ *  Initializes and returns a message object having the given senderId, senderDisplayName, date, and text.
+ *
+ *  @param senderId          The unique identifier for the user who sent the message. This value must not be `nil`.
+ *  @param senderDisplayName The display name for the user who sent the message. This value must not be `nil`.
+ *  @param date              The date that the message was sent. This value must not be `nil`.
+ *  @param text              The body text of the message. This value must not be `nil`.
+ *  @param isSystemMessage   The value of isSystemMessage property.
+ *
+ *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `NO`.
+ *
+ *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
+ */
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            text:(NSString *)text
+                 isSystemMessage:(BOOL)isSystemMessage;;
 /**
  *  Initializes and returns a message object having the given senderId, displayName, media,
  *  and current system date.
@@ -106,7 +150,7 @@
  *  @param displayName The display name for the user who sent the message. This value must not be `nil`.
  *  @param media       The media data for the message. This value must not be `nil`.
  *
- *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES`.
+ *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES` and `isSystemMessage` to `NO`.
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */
@@ -122,7 +166,7 @@
  *  @param date              The date that the message was sent. This value must not be `nil`.
  *  @param media             The media data for the message. This value must not be `nil`.
  *
- *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES`.
+ *  @discussion Initializing a `JSQMessage` with this method will set `isMediaMessage` to `YES` and `isSystemMessage` to `NO`.
  *
  *  @return An initialized `JSQMessage` object if successful, `nil` otherwise.
  */

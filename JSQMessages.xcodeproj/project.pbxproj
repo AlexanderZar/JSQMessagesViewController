@@ -107,6 +107,8 @@
 		BF6DA766BD3B8893A67FB2BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F882AA48978C11F64DC2DF /* libPods.a */; };
 		C8994EF7DDBE74B9E3F1A16C /* libPods-JSQMessagesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E23238C8D8DF79244DEE1787 /* libPods-JSQMessagesTests.a */; };
 		E8877F1947CE8050ECCD9539 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F882AA48978C11F64DC2DF /* libPods.a */; };
+		F5B22FBF1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B22FBE1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.m */; };
+		F5B22FC11CA2B68700F3B7D0 /* JSQMessagesCollectionViewCellSystem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5B22FC01CA2B68700F3B7D0 /* JSQMessagesCollectionViewCellSystem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +273,9 @@
 		AD6E75315517DE46FE495B65 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C3F882AA48978C11F64DC2DF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E23238C8D8DF79244DEE1787 /* libPods-JSQMessagesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JSQMessagesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5B22FBD1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQMessagesCollectionViewCellSystem.h; sourceTree = "<group>"; };
+		F5B22FBE1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQMessagesCollectionViewCellSystem.m; sourceTree = "<group>"; };
+		F5B22FC01CA2B68700F3B7D0 /* JSQMessagesCollectionViewCellSystem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JSQMessagesCollectionViewCellSystem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +537,9 @@
 				88A25F9119D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.h */,
 				88A25F9219D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.m */,
 				88A25F9319D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib */,
+				F5B22FBD1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.h */,
+				F5B22FBE1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.m */,
+				F5B22FC01CA2B68700F3B7D0 /* JSQMessagesCollectionViewCellSystem.xib */,
 				88A25F9419D8E01A00924534 /* JSQMessagesComposerTextView.h */,
 				88A25F9519D8E01A00924534 /* JSQMessagesComposerTextView.m */,
 				88A25F9619D8E01A00924534 /* JSQMessagesInputToolbar.h */,
@@ -725,6 +733,7 @@
 			files = (
 				886C33FF19F45E30006B4997 /* JSQMessagesViewController.podspec in Resources */,
 				8861666D19F492B70025B958 /* JSQMessagesAssets.bundle in Resources */,
+				F5B22FC11CA2B68700F3B7D0 /* JSQMessagesCollectionViewCellSystem.xib in Resources */,
 				88A25FCF19D8E01A00924534 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				88A25FCD19D8E01A00924534 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				88A25FD619D8E01A00924534 /* JSQMessagesToolbarContentView.xib in Resources */,
@@ -859,6 +868,7 @@
 				88A25FD519D8E01A00924534 /* JSQMessagesToolbarContentView.m in Sources */,
 				88A25FC119D8E01A00924534 /* JSQMessagesCollectionViewFlowLayout.m in Sources */,
 				8885734A19DE540400E89D20 /* DemoSettingsViewController.m in Sources */,
+				F5B22FBF1CA2B65900F3B7D0 /* JSQMessagesCollectionViewCellSystem.m in Sources */,
 				88A25FC719D8E01A00924534 /* JSQMessagesBubbleImage.m in Sources */,
 				88A25FC519D8E01A00924534 /* JSQMessage.m in Sources */,
 				88A25FD719D8E01A00924534 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,

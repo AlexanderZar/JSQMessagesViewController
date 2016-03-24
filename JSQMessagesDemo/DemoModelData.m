@@ -84,8 +84,11 @@
          */
         JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
         
+        JSQMessagesBubbleImageFactory *systemBubbleFactory = [JSQMessagesBubbleImageFactory systemMessageBubbleImageFactory];
+        
         self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
         self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+        self.systemBubbleImageData = [systemBubbleFactory incomingMessagesBubbleImageWithColor:[UIColor grayColor]];
     }
     
     return self;
@@ -128,6 +131,13 @@
                                         senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                      date:[NSDate date]
                                                      text:@"Now with media messages!"],
+                     
+                     [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
+                                        senderDisplayName:kJSQDemoAvatarDisplayNameSquires
+                                                     date:[NSDate date]
+                                                     text:@"This is a system message"
+                                          isSystemMessage:YES],
+                     
                      nil];
     
     [self addPhotoMediaMessage];

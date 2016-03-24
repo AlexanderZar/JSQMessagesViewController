@@ -106,13 +106,13 @@
         finalSize = [[messageData media] mediaViewDisplaySize];
     }
     else {
+        
         CGSize avatarSize = [self jsq_avatarSizeForMessageData:messageData withLayout:layout];
 
         //  from the cell xibs, there is a 2 point space between avatar and bubble
         CGFloat spacingBetweenAvatarAndBubble = 2.0f;
         CGFloat horizontalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.left + layout.messageBubbleTextViewTextContainerInsets.right;
-        CGFloat horizontalFrameInsets = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right;
-
+        CGFloat horizontalFrameInsets = ([messageData isSystemMessage]) ? 0 : (layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right);
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = [self textBubbleWidthForLayout:layout] - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
 
@@ -144,6 +144,9 @@
 - (CGSize)jsq_avatarSizeForMessageData:(id<JSQMessageData>)messageData
                             withLayout:(JSQMessagesCollectionViewFlowLayout *)layout
 {
+    if ([messageData isSystemMessage])
+        return CGSizeZero;
+    
     NSString *messageSender = [messageData senderId];
 
     if ([messageSender isEqualToString:[layout.collectionView.dataSource senderId]]) {

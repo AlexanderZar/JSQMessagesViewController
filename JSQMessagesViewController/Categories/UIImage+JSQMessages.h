@@ -62,6 +62,11 @@
 + (UIImage *)jsq_bubbleCompactTaillessImage;
 
 /**
+ *  @return The system message bubble image.
+ */
++ (UIImage *)jsq_bubbleSystemImage;
+
+/**
  *  @return The default input toolbar accessory image.
  */
 + (UIImage *)jsq_defaultAccessoryImage;

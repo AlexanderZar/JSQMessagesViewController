@@ -148,6 +148,24 @@
 @property (copy, nonatomic) NSString *incomingMediaCellIdentifier;
 
 /**
+ *  The collection view cell identifier to use for dequeuing system message collection view cells
+ *  in the collectionView for system messages.
+ *
+ *  @discussion This cell identifier is used for incoming media message data items.
+ *  The default value is the string returned by `[JSQMessagesCollectionViewCellSystem cellReuseIdentifier]`.
+ *  This value must not be `nil`.
+ *
+ *  @see JSQMessagesCollectionViewCellSystem.
+ *
+ *  @warning Overriding this property's default value is *not* recommended.
+ *  You should only override this property's default value if you are proividing your own cell prototypes.
+ *  These prototypes must be registered with the collectionView for reuse and you are then responsible for
+ *  completely overriding many delegate and data source methods for the collectionView,
+ *  including `collectionView:cellForItemAtIndexPath:`.
+ */
+@property (copy, nonatomic) NSString *systemCellIdentifier;
+
+/**
  *  Specifies whether or not the view controller should show the typing indicator for an incoming message.
  *
  *  @discussion Setting this property to `YES` will animate showing the typing indicator immediately.

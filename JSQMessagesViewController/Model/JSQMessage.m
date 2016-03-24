@@ -30,7 +30,20 @@
     return [[self alloc] initWithSenderId:senderId
                         senderDisplayName:displayName
                                      date:[NSDate date]
-                                     text:text];
+                                     text:text
+                          isSystemMessage:NO];
+}
+
++ (instancetype)messageWithSenderId:(NSString *)senderId
+                        displayName:(NSString *)displayName
+                               text:(NSString *)text
+                    isSystemMessage:(BOOL)isSystemMessage
+{
+    return [[self alloc] initWithSenderId:senderId
+                        senderDisplayName:displayName
+                                     date:[NSDate date]
+                                     text:text
+                          isSystemMessage:isSystemMessage];
 }
 
 - (instancetype)initWithSenderId:(NSString *)senderId
@@ -39,8 +52,31 @@
                             text:(NSString *)text
 {
     NSParameterAssert(text != nil);
+    
+    self = [self initWithSenderId:senderId
+                senderDisplayName:senderDisplayName
+                             date:date
+                          isMedia:NO
+                  isSystemMessage:NO];
+    if (self) {
+        _text = [text copy];
+    }
+    return self;
+}
 
-    self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:NO];
+- (instancetype)initWithSenderId:(NSString *)senderId
+               senderDisplayName:(NSString *)senderDisplayName
+                            date:(NSDate *)date
+                            text:(NSString *)text
+                 isSystemMessage:(BOOL)isSystemMessage
+{
+    NSParameterAssert(text != nil);
+
+    self = [self initWithSenderId:senderId
+                senderDisplayName:senderDisplayName
+                             date:date
+                          isMedia:NO
+                  isSystemMessage:isSystemMessage];
     if (self) {
         _text = [text copy];
     }
@@ -64,7 +100,11 @@
 {
     NSParameterAssert(media != nil);
 
-    self = [self initWithSenderId:senderId senderDisplayName:senderDisplayName date:date isMedia:YES];
+    self = [self initWithSenderId:senderId
+                senderDisplayName:senderDisplayName
+                             date:date
+                          isMedia:YES
+                  isSystemMessage:NO];
     if (self) {
         _media = media;
     }
@@ -75,6 +115,7 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                          isMedia:(BOOL)isMedia
+                 isSystemMessage:(BOOL)isSystemMessage
 {
     NSParameterAssert(senderId != nil);
     NSParameterAssert(senderDisplayName != nil);
@@ -86,6 +127,7 @@
         _senderDisplayName = [senderDisplayName copy];
         _date = [date copy];
         _isMediaMessage = isMedia;
+        _isSystemMessage = isSystemMessage;
     }
     return self;
 }
@@ -118,6 +160,7 @@
     return [self.senderId isEqualToString:aMessage.senderId]
     && [self.senderDisplayName isEqualToString:aMessage.senderDisplayName]
     && ([self.date compare:aMessage.date] == NSOrderedSame)
+    && (self.isSystemMessage == aMessage.isSystemMessage)
     && hasEqualContent;
 }
 
@@ -129,8 +172,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, text=%@, media=%@>",
-            [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), self.text, self.media];
+    return [NSString stringWithFormat:@"<%@: senderId=%@, senderDisplayName=%@, date=%@, isMediaMessage=%@, isSystemMessage=%@, text=%@, media=%@>",
+            [self class], self.senderId, self.senderDisplayName, self.date, @(self.isMediaMessage), @(self.isSystemMessage), self.text, self.media];
 }
 
 - (id)debugQuickLookObject
@@ -150,6 +193,7 @@
         _isMediaMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isMediaMessage))];
         _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
         _media = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(media))];
+        _isSystemMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isSystemMessage))];
     }
     return self;
 }
@@ -161,6 +205,7 @@
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
     [aCoder encodeBool:self.isMediaMessage forKey:NSStringFromSelector(@selector(isMediaMessage))];
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
+    [aCoder encodeBool:self.isSystemMessage forKey:NSStringFromSelector(@selector(isSystemMessage))];
 
     if ([self.media conformsToProtocol:@protocol(NSCoding)]) {
         [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];
@@ -181,7 +226,8 @@
     return [[[self class] allocWithZone:zone] initWithSenderId:self.senderId
                                              senderDisplayName:self.senderDisplayName
                                                           date:self.date
-                                                          text:self.text];
+                                                          text:self.text
+                                               isSystemMessage:self.isSystemMessage];
 }
 
 @end

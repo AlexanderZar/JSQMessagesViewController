@@ -35,6 +35,12 @@
 
 #pragma mark - Initialization
 
++ (instancetype)systemMessageBubbleImageFactory
+{
+    return [[self alloc] initWithBubbleImage:[UIImage jsq_bubbleSystemImage]
+                                   capInsets:UIEdgeInsetsZero];
+}
+
 - (instancetype)initWithBubbleImage:(UIImage *)bubbleImage capInsets:(UIEdgeInsets)capInsets
 {
 	NSParameterAssert(bubbleImage != nil);

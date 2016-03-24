@@ -29,6 +29,14 @@
 
 /**
  *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
+ *  system bubble image.
+ *
+ *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
+ */
++ (instancetype)systemMessageBubbleImageFactory;
+
+/**
+ *  Creates and returns a new instance of `JSQMessagesBubbleImageFactory` that uses the
  *  default bubble image assets and cap insets.
  *
  *  @return An initialized `JSQMessagesBubbleImageFactory` object if created successfully, `nil` otherwise.
