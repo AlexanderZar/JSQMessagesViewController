@@ -27,6 +27,7 @@
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesCollectionViewCellSystem.h"
+#import "JSQMessagesCollectionViewCellOffer.h"
 
 #import "JSQMessagesTypingIndicatorFooterView.h"
 #import "JSQMessagesLoadEarlierHeaderView.h"
@@ -110,6 +111,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     self.incomingMediaCellIdentifier = [JSQMessagesCollectionViewCellIncoming mediaCellReuseIdentifier];
     
     self.systemCellIdentifier = [JSQMessagesCollectionViewCellSystem cellReuseIdentifier];
+    
+    self.offerCellIdentifier = [JSQMessagesCollectionViewCellOffer cellReuseIdentifier];
 
     // NOTE: let this behavior be opt-in for now
     // [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
@@ -453,10 +456,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     BOOL isOutgoingMessage = [self isOutgoingMessage:messageItem];
     BOOL isMediaMessage = [messageItem isMediaMessage];
     BOOL isSystemMessage = [messageItem isSystemMessage];
+    BOOL isOfferMessage = [messageItem isOfferMessage];
 
     NSString *cellIdentifier = nil;
     if (isSystemMessage) {
         cellIdentifier = self.systemCellIdentifier;
+    }
+    else if (isOfferMessage) {
+        cellIdentifier = self.offerCellIdentifier;
     }
     else if (isMediaMessage) {
         cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;

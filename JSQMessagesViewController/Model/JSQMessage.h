@@ -58,6 +58,12 @@
 @property (assign, nonatomic, readonly) BOOL isSystemMessage;
 
 /**
+ *  Returns a boolean value specifying if the message is "offer" one.
+ *  The value of this property depends on how the object was initialized.
+ */
+@property (assign, nonatomic, readonly) BOOL isOfferMessage;
+
+/**
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */
@@ -105,7 +111,8 @@
 + (instancetype)messageWithSenderId:(NSString *)senderId
                         displayName:(NSString *)displayName
                                text:(NSString *)text
-                    isSystemMessage:(BOOL)isSystemMessage;
+                    isSystemMessage:(BOOL)isSystemMessage
+                     isOfferMessage:(BOOL)isOfferMessage;
 
 /**
  *  Initializes and returns a message object having the given senderId, senderDisplayName, date, and text.
@@ -141,7 +148,8 @@
                senderDisplayName:(NSString *)senderDisplayName
                             date:(NSDate *)date
                             text:(NSString *)text
-                 isSystemMessage:(BOOL)isSystemMessage;;
+                 isSystemMessage:(BOOL)isSystemMessage
+                  isOfferMessage:(BOOL)isOfferMessage;
 /**
  *  Initializes and returns a message object having the given senderId, displayName, media,
  *  and current system date.

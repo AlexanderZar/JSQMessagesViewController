@@ -30,6 +30,9 @@
  */
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
+
+@property (strong, nonatomic) UIFont *offerMessageButtonsFont;
+
 /**
  *  The width of the `messageBubbleContainerView` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than `0.0`.
@@ -102,5 +105,7 @@
  *  @see JSQMessagesCollectionViewCell.
  */
 @property (assign, nonatomic) CGFloat cellBottomLabelHeight;
+
+@property (assign, nonatomic) CGFloat textBubbleBottomSpacing;
 
 @end

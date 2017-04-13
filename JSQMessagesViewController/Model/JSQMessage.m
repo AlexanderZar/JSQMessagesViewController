@@ -31,19 +31,22 @@
                         senderDisplayName:displayName
                                      date:[NSDate date]
                                      text:text
-                          isSystemMessage:NO];
+                          isSystemMessage:NO
+                           isOfferMessage:NO];
 }
 
 + (instancetype)messageWithSenderId:(NSString *)senderId
                         displayName:(NSString *)displayName
                                text:(NSString *)text
                     isSystemMessage:(BOOL)isSystemMessage
+                     isOfferMessage:(BOOL)isOfferMessage
 {
     return [[self alloc] initWithSenderId:senderId
                         senderDisplayName:displayName
                                      date:[NSDate date]
                                      text:text
-                          isSystemMessage:isSystemMessage];
+                          isSystemMessage:isSystemMessage
+                           isOfferMessage:isOfferMessage];
 }
 
 - (instancetype)initWithSenderId:(NSString *)senderId
@@ -57,7 +60,8 @@
                 senderDisplayName:senderDisplayName
                              date:date
                           isMedia:NO
-                  isSystemMessage:NO];
+                  isSystemMessage:NO
+                   isOfferMessage:NO];
     if (self) {
         _text = [text copy];
     }
@@ -69,6 +73,7 @@
                             date:(NSDate *)date
                             text:(NSString *)text
                  isSystemMessage:(BOOL)isSystemMessage
+                  isOfferMessage:(BOOL)isOfferMessage
 {
     NSParameterAssert(text != nil);
 
@@ -76,7 +81,8 @@
                 senderDisplayName:senderDisplayName
                              date:date
                           isMedia:NO
-                  isSystemMessage:isSystemMessage];
+                  isSystemMessage:isSystemMessage
+                   isOfferMessage:isOfferMessage];
     if (self) {
         _text = [text copy];
     }
@@ -104,7 +110,8 @@
                 senderDisplayName:senderDisplayName
                              date:date
                           isMedia:YES
-                  isSystemMessage:NO];
+                  isSystemMessage:NO
+                   isOfferMessage:NO];
     if (self) {
         _media = media;
     }
@@ -116,6 +123,7 @@
                             date:(NSDate *)date
                          isMedia:(BOOL)isMedia
                  isSystemMessage:(BOOL)isSystemMessage
+                  isOfferMessage:(BOOL)isOfferMessage
 {
     NSParameterAssert(senderId != nil);
     NSParameterAssert(senderDisplayName != nil);
@@ -128,6 +136,7 @@
         _date = [date copy];
         _isMediaMessage = isMedia;
         _isSystemMessage = isSystemMessage;
+        _isOfferMessage = isOfferMessage;
     }
     return self;
 }
@@ -161,6 +170,7 @@
     && [self.senderDisplayName isEqualToString:aMessage.senderDisplayName]
     && ([self.date compare:aMessage.date] == NSOrderedSame)
     && (self.isSystemMessage == aMessage.isSystemMessage)
+    && (self.isOfferMessage == aMessage.isOfferMessage)
     && hasEqualContent;
 }
 
@@ -194,6 +204,7 @@
         _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
         _media = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(media))];
         _isSystemMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isSystemMessage))];
+        _isOfferMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isOfferMessage))];
     }
     return self;
 }
@@ -206,6 +217,7 @@
     [aCoder encodeBool:self.isMediaMessage forKey:NSStringFromSelector(@selector(isMediaMessage))];
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
     [aCoder encodeBool:self.isSystemMessage forKey:NSStringFromSelector(@selector(isSystemMessage))];
+    [aCoder encodeBool:self.isOfferMessage forKey:NSStringFromSelector(@selector(isOfferMessage))];
 
     if ([self.media conformsToProtocol:@protocol(NSCoding)]) {
         [aCoder encodeObject:self.media forKey:NSStringFromSelector(@selector(media))];
@@ -227,7 +239,8 @@
                                              senderDisplayName:self.senderDisplayName
                                                           date:self.date
                                                           text:self.text
-                                               isSystemMessage:self.isSystemMessage];
+                                               isSystemMessage:self.isSystemMessage
+                                                isOfferMessage:self.isOfferMessage];
 }
 
 @end

@@ -158,6 +158,17 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
+- (void)setOfferMessageButtonsFont:(UIFont *)offerMessageButtonsFont
+{
+    if ([_offerMessageButtonsFont isEqual:offerMessageButtonsFont]) {
+        return;
+    }
+    
+    NSParameterAssert(offerMessageButtonsFont != nil);
+    _offerMessageButtonsFont = offerMessageButtonsFont;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
 - (void)setMessageBubbleLeftRightMargin:(CGFloat)messageBubbleLeftRightMargin
 {
     NSParameterAssert(messageBubbleLeftRightMargin >= 0.0f);
@@ -421,6 +432,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     finalHeight += attributes.cellTopLabelHeight;
     finalHeight += attributes.messageBubbleTopLabelHeight;
     finalHeight += attributes.cellBottomLabelHeight;
+    finalHeight += attributes.textBubbleBottomSpacing;
     
     return CGSizeMake(self.itemWidth, ceilf(finalHeight));
 }
@@ -439,10 +451,14 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
     
+    layoutAttributes.offerMessageButtonsFont = self.offerMessageButtonsFont;
+    
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
     
     layoutAttributes.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     
+    layoutAttributes.textBubbleBottomSpacing = [self.collectionView.delegate collectionView:self.collectionView
+                                                                                     layout:self textBottomSpacingForCellAtIndexPath:indexPath];
     layoutAttributes.cellTopLabelHeight = [self.collectionView.delegate collectionView:self.collectionView
                                                                                 layout:self
                                                       heightForCellTopLabelAtIndexPath:indexPath];

@@ -75,6 +75,8 @@
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
     [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
                                                                                       action:@selector(customAction:)] ];
+    
+    self.collectionView.collectionViewLayout.offerMessageButtonsFont = [UIFont boldSystemFontOfSize:20];
 
     /**
      *  OPT-IN: allow cells to be deleted
@@ -315,7 +317,8 @@
                                              senderDisplayName:senderDisplayName
                                                           date:date
                                                           text:text
-                                               isSystemMessage:NO];
+                                               isSystemMessage:NO
+                                                isOfferMessage:NO];
     
     [self.demoData.messages addObject:message];
     
@@ -395,6 +398,9 @@
     if (message.isSystemMessage) {
         return self.demoData.systemBubbleImageData;
     }
+    
+    if (message.isOfferMessage)
+        return self.demoData.systemBubbleImageData;
     
     if ([message.senderId isEqualToString:self.senderId]) {
         return self.demoData.outgoingBubbleImageData;
@@ -523,7 +529,7 @@
     
     if (!msg.isMediaMessage) {
         
-        if (msg.isSystemMessage) {
+        if (msg.isSystemMessage || msg.isOfferMessage) {
             cell.textView.textColor = [UIColor whiteColor];
         }
         else if ([msg.senderId isEqualToString:self.senderId]) {
@@ -600,6 +606,14 @@
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     
+    return 0.0f;
+}
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout textBottomSpacingForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessage *currentMessage = [self.demoData.messages objectAtIndex:indexPath.item];
+    if (currentMessage.isOfferMessage)
+        return 70.0f;
     return 0.0f;
 }
 

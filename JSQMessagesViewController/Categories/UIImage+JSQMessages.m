@@ -23,6 +23,13 @@
 
 @implementation UIImage (JSQMessages)
 
++ (UIImage *)jsq_imageNamed:(NSString *)imageName
+{
+    NSBundle *bundle = [NSBundle jsq_messagesAssetBundle];
+    NSString *path = [bundle pathForResource:imageName ofType:@"png" inDirectory:@"Images"];
+    return [UIImage imageWithContentsOfFile:path];
+}
+
 - (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor
 {
     NSParameterAssert(maskColor != nil);

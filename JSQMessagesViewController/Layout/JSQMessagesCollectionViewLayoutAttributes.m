@@ -28,6 +28,12 @@
     _messageBubbleFont = messageBubbleFont;
 }
 
+- (void)setOfferMessageButtonsFont:(UIFont *)offerMessageButtonsFont
+{
+    NSParameterAssert(offerMessageButtonsFont != nil);
+    _offerMessageButtonsFont = offerMessageButtonsFont;
+}
+
 - (void)setMessageBubbleContainerViewWidth:(CGFloat)messageBubbleContainerViewWidth
 {
     NSParameterAssert(messageBubbleContainerViewWidth > 0.0f);
@@ -64,6 +70,12 @@
     _cellBottomLabelHeight = [self jsq_correctedLabelHeightForHeight:cellBottomLabelHeight];
 }
 
+- (void)setTextBubbleBottomSpacing:(CGFloat)textBubbleBottomSpacing
+{
+    NSParameterAssert(textBubbleBottomSpacing >= 0.0f);
+    _textBubbleBottomSpacing = [self jsq_correctedLabelHeightForHeight:textBubbleBottomSpacing];
+}
+
 #pragma mark - Utilities
 
 - (CGSize)jsq_correctedAvatarSizeFromSize:(CGSize)size
@@ -92,6 +104,7 @@
         JSQMessagesCollectionViewLayoutAttributes *layoutAttributes = (JSQMessagesCollectionViewLayoutAttributes *)object;
         
         if (![layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
+            || ![layoutAttributes.offerMessageButtonsFont isEqual:self.offerMessageButtonsFont]
             || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
             || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
             || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
@@ -99,7 +112,8 @@
             || (int)layoutAttributes.messageBubbleContainerViewWidth != (int)self.messageBubbleContainerViewWidth
             || (int)layoutAttributes.cellTopLabelHeight != (int)self.cellTopLabelHeight
             || (int)layoutAttributes.messageBubbleTopLabelHeight != (int)self.messageBubbleTopLabelHeight
-            || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight) {
+            || (int)layoutAttributes.cellBottomLabelHeight != (int)self.cellBottomLabelHeight
+            || (int)layoutAttributes.textBubbleBottomSpacing != (int)self.textBubbleBottomSpacing) {
             return NO;
         }
     }
@@ -123,6 +137,7 @@
     }
     
     copy.messageBubbleFont = self.messageBubbleFont;
+    copy.offerMessageButtonsFont = self.offerMessageButtonsFont;
     copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth;
     copy.textViewFrameInsets = self.textViewFrameInsets;
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
@@ -131,6 +146,7 @@
     copy.cellTopLabelHeight = self.cellTopLabelHeight;
     copy.messageBubbleTopLabelHeight = self.messageBubbleTopLabelHeight;
     copy.cellBottomLabelHeight = self.cellBottomLabelHeight;
+    copy.textBubbleBottomSpacing = self.textBubbleBottomSpacing;
     
     return copy;
 }

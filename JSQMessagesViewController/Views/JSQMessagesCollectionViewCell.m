@@ -21,6 +21,7 @@
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
 #import "JSQMessagesCollectionViewCellSystem.h"
+#import "JSQMessagesCollectionViewCellOffer.h"
 #import "JSQMessagesCollectionViewLayoutAttributes.h"
 
 #import "UIView+JSQMessages.h"
@@ -49,6 +50,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomVerticalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBottomSpaceConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
@@ -115,6 +118,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.cellTopLabelHeightConstraint.constant = 0.0f;
     self.messageBubbleTopLabelHeightConstraint.constant = 0.0f;
     self.cellBottomLabelHeightConstraint.constant = 0.0f;
+    
+    self.textViewBottomSpaceConstraint.constant = 0.0f;
 
     self.avatarViewSize = CGSizeZero;
 
@@ -179,7 +184,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [super applyLayoutAttributes:layoutAttributes];
 
     JSQMessagesCollectionViewLayoutAttributes *customAttributes = (JSQMessagesCollectionViewLayoutAttributes *)layoutAttributes;
-
+    
     if (self.textView.font != customAttributes.messageBubbleFont) {
         self.textView.font = customAttributes.messageBubbleFont;
     }
@@ -188,7 +193,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
         self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
     }
     
-    self.textViewFrameInsets = ([self isKindOfClass:[JSQMessagesCollectionViewCellSystem class]])
+    self.textViewFrameInsets = ([self isKindOfClass:[JSQMessagesCollectionViewCellSystem class]] ||
+                                [self isKindOfClass:[JSQMessagesCollectionViewCellOffer class]])
     ? UIEdgeInsetsZero
     : customAttributes.textViewFrameInsets;
 
@@ -203,6 +209,9 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
     [self jsq_updateConstraint:self.cellBottomLabelHeightConstraint
                   withConstant:customAttributes.cellBottomLabelHeight];
+    
+    [self jsq_updateConstraint:self.textViewBottomSpaceConstraint
+                  withConstant:customAttributes.textBubbleBottomSpacing];
 
     if ([self isKindOfClass:[JSQMessagesCollectionViewCellIncoming class]]) {
         self.avatarViewSize = customAttributes.incomingAvatarViewSize;

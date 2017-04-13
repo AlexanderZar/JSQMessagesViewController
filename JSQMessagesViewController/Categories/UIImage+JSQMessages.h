@@ -20,6 +20,8 @@
 
 @interface UIImage (JSQMessages)
 
++ (UIImage *)jsq_imageNamed:(NSString *)imageName;
+
 /**
  *  Creates and returns a new image object that is masked with the specified mask color.
  *

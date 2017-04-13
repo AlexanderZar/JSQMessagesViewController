@@ -41,7 +41,6 @@
             [self loadFakeMessages];
         }
         
-        
         /**
          *  Create avatar images once.
          *
@@ -135,8 +134,9 @@
                      [[JSQMessage alloc] initWithSenderId:kJSQDemoAvatarIdSquires
                                         senderDisplayName:kJSQDemoAvatarDisplayNameSquires
                                                      date:[NSDate date]
-                                                     text:@"This is a system message"
-                                          isSystemMessage:YES],
+                                                     text:@"Louise sent you an offer for 45€. Do you accept this offer ?"
+                                          isSystemMessage:NO
+                                           isOfferMessage:YES],
                      
                      nil];
     
