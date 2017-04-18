@@ -459,11 +459,11 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     BOOL isOfferMessage = [messageItem isOfferMessage];
 
     NSString *cellIdentifier = nil;
-    if (isSystemMessage) {
-        cellIdentifier = self.systemCellIdentifier;
-    }
-    else if (isOfferMessage) {
+    if (isOfferMessage) {
         cellIdentifier = self.offerCellIdentifier;
+    }
+    else if (isSystemMessage) {
+        cellIdentifier = self.systemCellIdentifier;
     }
     else if (isMediaMessage) {
         cellIdentifier = isOutgoingMessage ? self.outgoingMediaCellIdentifier : self.incomingMediaCellIdentifier;
